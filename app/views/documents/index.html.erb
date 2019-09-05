@@ -1,0 +1,14 @@
+<h1>Your documents</h1>
+<% @documents.each do |p| %>
+  <div class="panel panel-default", style="padding: 15px 40px">
+    <p><%= image_tag @document.file_name.preview(resize: "200x400") %></p>
+    <h3><%= p.description %></h3>
+    <p><%= p.author %></p>
+
+    <p>
+      <small><%= link_to "Edit", "#" %></small>
+      <small><%= link_to "Show", p %></small>
+      <small><%= link_to "Destroy", "#" %></small>
+    </p>
+  </div>
+<% end %>

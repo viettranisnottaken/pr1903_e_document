@@ -1,0 +1,30 @@
+<h1>Document</h1>
+
+<!-- use .card instead of .panel -->
+<p><%= @document.description %></p>
+<p><%= @document.author %></p>
+<%= image_tag @document.file_name.preview(resize: "100x200") %>
+
+<h2>Comments</h2>
+
+<% @document.comments.each do |c| %>
+  <div class="card">
+    <div class="card-body">
+      <h3><%= c.user.name %></h3>
+      <p><%= c.content %></p>
+      <p>
+        <small><%= link_to "Edit", edit_comment_path %></small>
+        <small><%= link_to "Delete", c, method: :destroy, data: {confirm: "Are you sure?"} %></small>
+      </p>
+    </div>
+  </div>
+<% end %>
+
+<%= form_for(@document.comments.build(user: current_user)) do |f| %>
+  <%= f.label :content %>
+  <%= f.text_field :content, class: "form-control" %>
+
+  <%= hidden_field_tag :document_id, @document.id %>
+
+  <%= f.submit "Comment", class: "btn btn-primary" %>
+<% end %>

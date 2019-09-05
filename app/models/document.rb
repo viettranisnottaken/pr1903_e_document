@@ -7,5 +7,7 @@ class Document < ApplicationRecord
   has_many :favorites
   has_many :histories
 
+  has_one_attached :file_name
+
   belongs_to :user
 end
