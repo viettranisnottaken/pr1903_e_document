@@ -9,9 +9,8 @@ class DocumentsController < ApplicationController
 
   def create
     @document = current_user.documents.build(document_params)
-    @document.file_name.attach(params[:document][:file_name])
     if @document.save!
-
+      @document.file_name.attach(params[:document][:file_name])
       redirect_to @document
       flash[:success] = "File uploaded!"
     else
