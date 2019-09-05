@@ -1,2 +1,14 @@
-<h1>StaticPages#home</h1>
-<p>Find me in app/views/static_pages/home.html.erb</p>
+<h1>Home</h1>
+
+<h2>All documents</h2>
+
+<div class="row">
+  <% Document.all.each do |d| %>
+    <div class="col-4">
+      <p><%= image_tag d.file_name.preview(resize: "100x200") %></p>
+      <p><%= d.description %></p>
+      <p><%= d.author %></p>
+      <p><%= link_to "document show", d %></p>
+    </div>
+  <% end %>
+</div>

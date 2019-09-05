@@ -68,6 +68,7 @@ ActiveRecord::Schema.define(version: 2019_09_03_130836) do
     t.boolean "checked"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "author", default: "Unknown"
     t.index ["user_id"], name: "index_documents_on_user_id"
   end
 
@@ -111,7 +112,7 @@ ActiveRecord::Schema.define(version: 2019_09_03_130836) do
     t.string "name"
     t.string "email"
     t.string "password_digest"
-    t.boolean "admin"
+    t.boolean "admin", default: false
     t.integer "coin"
     t.integer "illegal_count"
     t.datetime "created_at", null: false
