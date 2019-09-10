@@ -1,0 +1,9 @@
+<% @requests.each do |n| %>
+  <div style="border: 1px solid black">
+    <h1><%= n.user.name %></h1>
+    <p><%= form_for(n, url: admin_request_path(n), method: :patch) do |f| %>
+      <%= f.button "Accept", name: :requested, value: "accepted" %>
+      <%= f.button "Reject", name: :requested, value: "not_yet_rejected" %>
+    <% end %></p>
+  </div>
+<% end %>

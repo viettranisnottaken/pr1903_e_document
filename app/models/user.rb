@@ -7,6 +7,7 @@ class User < ApplicationRecord
   has_many :follow_relationships
   has_many :histories
   has_many :downloaded_times
+  has_many :requests
 
   has_one_attached :avatar
 

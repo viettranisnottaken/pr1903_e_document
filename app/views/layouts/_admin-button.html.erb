@@ -1,0 +1,12 @@
+<% if current_user.role == "admin" %>
+  <button type="button" class="btn btn-success">Admin</button>
+<% elsif current_user.role == "user" %>
+  <% if current_user.requested == nil %>
+    <%= link_to "Become an admin", requests_path, class: "btn btn-primary", method: :post %>
+  <% elsif current_user.requested == "pending" || current_user.requested == "not_yet_rejected" %>
+    <button type="button" class="btn btn-info"></button>
+  <% elsif current_user.requested == "rejected" %>
+    <!-- <h3>You have been rejected</h3> -->
+    <%= link_to "Become an admin", requests_path, class: "btn btn-primary", method: :post %>
+  <% end %>
+<% end %>
