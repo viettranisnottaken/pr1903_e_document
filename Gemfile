@@ -15,6 +15,7 @@ gem "puma", "~> 3.11"
 gem "sass-rails", "~> 5.0"
 # Use Uglifier as compressor for JavaScript assets
 gem "uglifier", ">= 1.3.0"
+
 # See https://github.com/rails/execjs#readme for more supported runtimes
 # gem 'mini_racer', platforms: :ruby
 
@@ -24,6 +25,7 @@ gem "coffee-rails", "~> 4.2"
 gem "turbolinks", "~> 5"
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 gem "jbuilder", "~> 2.5"
+
 # Use Redis adapter to run Action Cable in production
 # gem 'redis', '~> 4.0'
 # Use ActiveModel has_secure_password
@@ -52,11 +54,11 @@ group :development do
   gem "rubocop-github"
   gem "spring"
   gem "spring-watcher-listen", "~> 2.0.0"
-
 end
 
 group :test do
   # Adds support for Capybara system testing and selenium driver
+
   gem "capybara", ">= 2.15"
   gem "selenium-webdriver"
   # Easy installation and use of chromedriver to run system tests with Chrome
@@ -72,6 +74,4 @@ gem "bcrypt", "~> 3.1", ">= 3.1.12"
 #bootstrap
 gem "bootstrap", "~> 4.0.0"
 gem "jquery-rails"
-
-#
 gem "image_processing", "~> 1.2"
