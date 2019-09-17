@@ -11,6 +11,7 @@ Rails.application.routes.draw do
   resources :documents
   resources :comments
   resources :requests
+  resources :histories
 
   namespace :admin do
     resources :requests, only: [:index, :update]

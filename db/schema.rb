@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_09_10_125208) do
+ActiveRecord::Schema.define(version: 2019_09_17_130255) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -99,7 +99,7 @@ ActiveRecord::Schema.define(version: 2019_09_10_125208) do
   create_table "histories", force: :cascade do |t|
     t.integer "document_id"
     t.integer "user_id"
-    t.integer "count"
+    t.integer "counter"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["document_id"], name: "index_histories_on_document_id"

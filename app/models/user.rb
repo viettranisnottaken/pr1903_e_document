@@ -6,6 +6,7 @@ class User < ApplicationRecord
   has_many :favorites
   has_many :follow_relationships
   has_many :histories
+  has_many :viewed_documents, through: :histories, class_name: "Document"
   has_many :downloaded_times
   has_many :requests
 

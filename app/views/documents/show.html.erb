@@ -3,7 +3,16 @@
 <!-- use .card instead of .panel -->
 <p><%= @document.description %></p>
 <p><%= @document.author %></p>
-<%= image_tag @document.file_name.preview(resize: "100x200") %>
+<%# image_tag @document.file_name.preview(resize: "100x200") %>
+
+<% if History.where(user_id: current_user.id, document_id: @document.id).exists? %>
+  <p>You have viewed this document <%= @history.counter %> times</p>
+<% end %>
+
+<p><%= @total_view %> views</p>
+
+<h3>People who viewed this document</h3>
+<p><%= @document.users.pluck(:name).join(", ") %></p>
 
 <h2>Comments</h2>
 

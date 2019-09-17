@@ -20,6 +20,14 @@ class DocumentsController < ApplicationController
 
   def show
     @document = Document.find(params[:id])
+    @history = History.find_by(user_id: current_user.id, document_id: @document.id)
+    if @history
+      @history.update_attribute(:counter, @history.counter + 1)
+    else
+      @history = History.create(document_id: @document.id, user_id: current_user.id, counter: 1)
+    end
+
+    @total_view = History.where(document_id: @document.id).sum(:counter)
   end
 
   def edit
