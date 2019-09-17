@@ -1,0 +1,10 @@
+<h1>Reason</h1>
+<div class="row justify-content-center">
+  <div class="col-md-6">
+    <%= form_for(:user, url: update_role_admin_user_path, method: :patch) do |f| %>
+      <%= f.label :reason  %>
+      <%= f.text_field :reason %>
+      <%= f.submit "Submit" %>
+    <% end %>
+  </div>
+</div>

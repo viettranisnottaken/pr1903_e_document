@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 # This file is auto-generated from the current state of the database. Instead
 # of editing this file, please use the migrations feature of Active Record to
 # incrementally modify your database, and then regenerate this schema definition.
@@ -12,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_09_03_130836) do
+ActiveRecord::Schema.define(version: 2019_09_10_125208) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -68,6 +66,7 @@ ActiveRecord::Schema.define(version: 2019_09_03_130836) do
     t.boolean "checked"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "author", default: "Unknown"
     t.index ["user_id"], name: "index_documents_on_user_id"
   end
 
@@ -107,17 +106,26 @@ ActiveRecord::Schema.define(version: 2019_09_03_130836) do
     t.index ["user_id"], name: "index_histories_on_user_id"
   end
 
+  create_table "requests", force: :cascade do |t|
+    t.integer "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_requests_on_user_id"
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "name"
     t.string "email"
     t.string "password_digest"
-    t.boolean "admin"
     t.integer "coin"
     t.integer "illegal_count"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.boolean "activated"
     t.string "avatar"
+    t.string "role", default: "user"
+    t.string "requested"
+    t.string "reason"
   end
 
 end
