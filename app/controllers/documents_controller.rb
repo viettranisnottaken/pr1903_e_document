@@ -1,4 +1,7 @@
 class DocumentsController < ApplicationController
+  before_action :set_document, only: [:edit, :update, :show, :destroy]
+  before_action :correct_user, only: [:edit, :update, :destroy]
+
   def index
     @documents = current_user.documents.all
   end
@@ -35,7 +38,13 @@ class DocumentsController < ApplicationController
   end
 
   def update
-    #code
+    if @document.update_attributes(document_params)
+      redirect_to @document
+      flash[:success] = "Document updated"
+    else
+      redirect_to @document
+      flash[:danger] = "Document not updated"
+    end
   end
 
   def destroy
@@ -46,5 +55,17 @@ class DocumentsController < ApplicationController
 
   def document_params
     params.require(:document).permit(:file_name, :description, :author)
+  end
+
+  def set_document
+    @document = Document.find(params[:id])
+  end
+
+  def correct_user
+    unless @document.user == current_user
+      respond_to do |format|
+        format.html {redirect_to root_path, notice: "Mind your own business boi"}
+      end
+    end
   end
 end
