@@ -1,8 +1,9 @@
 <h1>Document</h1>
 
 <!-- use .card instead of .panel -->
-<p><%= @document.description %></p>
-<p><%= @document.author %></p>
+<p>Description: <%= @document.description %></p>
+<p>Author: <%= @document.author %></p>
+<p><%= link_to "Edit this document", edit_document_path(@document) %></p>
 <%# image_tag @document.file_name.preview(resize: "100x200") %>
 
 <% if History.where(user_id: current_user.id, document_id: @document.id).exists? %>

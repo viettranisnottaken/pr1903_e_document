@@ -4,7 +4,7 @@ class UsersController < ApplicationController
   before_action :check_admin, only: [:destroy]
 
   def index
-    #code
+    @users = User.all
   end
 
   def new
