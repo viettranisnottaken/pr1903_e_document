@@ -11,4 +11,6 @@ class Document < ApplicationRecord
   has_one_attached :file_name
 
   belongs_to :user
+
+  acts_as_paranoid
 end
