@@ -12,6 +12,8 @@ class User < ApplicationRecord
 
   has_one_attached :avatar
 
+  acts_as_paranoid
+
   validates :name, presence: true, length: {maximum: 100}
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-]+(\.[a-z\d\-]+)*\.[a-z]+\z/i
   validates :email, presence: true, length: {maximum: 120},
@@ -19,4 +21,5 @@ class User < ApplicationRecord
                     uniqueness: { case_sensitive: false }
   has_secure_password
   validates :password, presence: true, length: {minimum: 6}
+
 end

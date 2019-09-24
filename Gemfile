@@ -75,3 +75,9 @@ gem "bcrypt", "~> 3.1", ">= 3.1.12"
 gem "bootstrap", "~> 4.0.0"
 gem "jquery-rails"
 gem "image_processing", "~> 1.2"
+
+# paranoia
+gem "paranoia", "~> 2.2"
+
+# will_paginate
+gem 'will_paginate', '~> 3.1.0'
