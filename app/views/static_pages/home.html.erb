@@ -8,24 +8,29 @@
       <p><%# image_tag d.file_name.preview(resize_to_limit: [100, 100]) %></p>
       <p><%= d.description %></p>
       <p><%= d.author %></p>
+      <p><%= d.view_count %> views</p>
+      <p><%= d.download_count %> downloads</p>
       <p><%= link_to "document show", d %></p>
-      <p><%= link_to "Download this document", rails_blob_path(d.file_name, disposition: 'attachment') %></p>
+      <p><%= link_to "Download this document", download_pdf_document_path(d), target: "blank" %></p>
     </div>
   <% end %>
 </div>
 
 
 <h2>Lastest documents</h2>
+
+
+<h2>Most viewed documents</h2>
 <div class="row">
   <% @most_viewed_documents.each do |d| %>
     <div class="col-4">
       <p><%# image_tag d.file_name.preview(resize_to_limit: [100, 100]) %></p>
       <p><%= d.description %></p>
       <p><%= d.author %></p>
+      <p><%= d.view_count %> views</p>
+      <p><%= d.download_count %> downloads</p>
       <p><%= link_to "document show", d %></p>
-      <p><%= link_to "Download this document", rails_blob_path(d.file_name, disposition: 'attachment') %></p>
+      <p><%= link_to "Download this document", download_pdf_document_path(d), target: "blank" %></p>
     </div>
   <% end %>
 </div>
-
-<h2>Most viewed documents</h2>

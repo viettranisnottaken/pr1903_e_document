@@ -1,5 +1,5 @@
 class DocumentsController < ApplicationController
-  before_action :set_document, only: [:edit, :update, :show, :destroy]
+  before_action :set_document, only: [:edit, :update, :show, :destroy, :download_pdf]
   before_action :correct_user, only: [:edit, :update, :destroy]
 
   def index
@@ -24,6 +24,7 @@ class DocumentsController < ApplicationController
   def show
     @document = Document.find(params[:id])
     @history = History.find_by(user_id: current_user.id, document_id: @document.id)
+    @downloaded_time = DownloadedTime.find_by(user_id: current_user.id, document_id: @document.id)
     if @history
       @history.update_attribute(:counter, @history.counter + 1)
     else
@@ -32,6 +33,12 @@ class DocumentsController < ApplicationController
 
     @total_view = History.where(document_id: @document.id).sum(:counter)
     @document.update_attribute(:view_count, @total_view)
+
+    @total_download_count = DownloadedTime.where(document_id: @document.id).sum(:count)
+    @document.update_attribute(:download_count, @total_download_count)
+
+    @is_read = @document.histories.where(user_id: current_user.id).exists?
+    @is_downloaded = @document.downloaded_times.where(user_id: current_user.id)
   end
 
   def edit
@@ -50,6 +57,17 @@ class DocumentsController < ApplicationController
 
   def destroy
     #code
+  end
+
+  def download_pdf
+    this_doc_download_time = @document.downloaded_times.find_by(user_id: current_user.id)
+    if this_doc_download_time
+      this_doc_download_time.update_attribute(:count, this_doc_download_time.count + 1)
+    else
+      @document.downloaded_times.create(user_id: current_user.id, count: 1)
+    end
+    send_data @document.file_name.download, filename: @document.file_name.filename.to_s,
+      content_type: @document.file_name.content_type
   end
 
   private
