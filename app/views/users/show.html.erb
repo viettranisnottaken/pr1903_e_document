@@ -1,5 +1,13 @@
 <h1>Profile</h1>
 
+<%= render "follow_relationships/follow-form" %>
+<% if @user == current_user %>
+  <p><%= link_to "All friend requests", follow_relationships_path %></p>
+<% end %>
+
+<p><%= link_to "Friendlist", friendlist_user_path %></p>
+
+
 <h2><%= @user.name %></h2>
 <%= image_tag @user.avatar, size: '960x540' %>
 

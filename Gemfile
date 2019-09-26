@@ -81,3 +81,6 @@ gem "paranoia", "~> 2.2"
 
 # will_paginate
 gem 'will_paginate', '~> 3.1.0'
+
+# faker
+gem 'faker', :git => 'https://github.com/faker-ruby/faker.git', :branch => 'master'

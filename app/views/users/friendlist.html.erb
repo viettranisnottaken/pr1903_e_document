@@ -1,0 +1,11 @@
+<div class="container">
+  <table>
+    <% @friends.each do |n| %>
+      <tr>
+        <td>
+          <p><%= image_tag n.avatar, size: '192x108' %> <%= link_to n.name, n %></p>
+        </td>
+      </tr>
+    <% end %>
+  </table>
+</div>

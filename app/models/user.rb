@@ -10,6 +10,25 @@ class User < ApplicationRecord
   has_many :downloaded_times
   has_many :requests
 
+  has_many :active_relationships, class_name: "FollowRelationship",
+                                foreign_key: :following_id,
+                                dependent: :destroy
+  has_many :followed, through: :active_relationships, source: :followed
+  has_many :passive_relationships, class_name: "FollowRelationship",
+                                 foreign_key: :followed_id,
+                                 dependent: :destroy
+  has_many :following, through: :passive_relationships, source: :following
+
+  has_many :active_friends, -> {where(status: "accepted")},
+                            class_name: "FollowRelationship",
+                            foreign_key: :following_id
+  has_many :followed_friends, through: :active_friends, source: :followed
+  has_many :passive_friends, -> {where status: "accepted"},
+                             class_name: "FollowRelationship",
+                             foreign_key: :followed_id
+  has_many :following_friends, through: :passive_friends, source: :following
+
+
   has_one_attached :avatar
 
   acts_as_paranoid

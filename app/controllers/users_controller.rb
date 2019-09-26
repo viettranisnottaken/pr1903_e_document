@@ -39,10 +39,16 @@ class UsersController < ApplicationController
   def show
     @user = User.find(params[:id])
     @histories = History.where({user_id: @user.id})
+    @friend_request = current_user.active_relationships.find_by(following_id: current_user.id,
+                                                                followed_id: @user.id)
   end
 
   def destroy
     #code for banning?
+  end
+
+  def friendlist
+    @friends = current_user.following_friends + current_user.followed_friends
   end
 
   private
