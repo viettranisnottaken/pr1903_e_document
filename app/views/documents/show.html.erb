@@ -5,6 +5,7 @@
 <p>Author: <%= @document.author %></p>
 <p><%= link_to "Edit this document", edit_document_path(@document) %></p>
 <%# image_tag @document.file_name.preview(resize: "100x200") %>
+<%= link_to "Download this document", rails_blob_path(@document.file_name, disposition: 'attachment') %>
 
 <% if History.where(user_id: current_user.id, document_id: @document.id).exists? %>
   <p>You have viewed this document <%= @history.counter %> times</p>

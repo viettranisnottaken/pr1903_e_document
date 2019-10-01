@@ -31,6 +31,7 @@ class DocumentsController < ApplicationController
     end
 
     @total_view = History.where(document_id: @document.id).sum(:counter)
+    @document.update_attribute(:view_count, @total_view)
   end
 
   def edit
