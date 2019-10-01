@@ -1,2 +1,31 @@
-<h1>StaticPages#home</h1>
-<p>Find me in app/views/static_pages/home.html.erb</p>
+<h1>Home</h1>
+
+<h2>All documents</h2>
+
+<div class="row">
+  <% Document.all.each do |d| %>
+    <div class="col-4">
+      <p><%# image_tag d.file_name.preview(resize_to_limit: [100, 100]) %></p>
+      <p><%= d.description %></p>
+      <p><%= d.author %></p>
+      <p><%= link_to "document show", d %></p>
+      <p><%= link_to "Download this document", rails_blob_path(d.file_name, disposition: 'attachment') %></p>
+    </div>
+  <% end %>
+</div>
+
+
+<h2>Lastest documents</h2>
+<div class="row">
+  <% @most_viewed_documents.each do |d| %>
+    <div class="col-4">
+      <p><%# image_tag d.file_name.preview(resize_to_limit: [100, 100]) %></p>
+      <p><%= d.description %></p>
+      <p><%= d.author %></p>
+      <p><%= link_to "document show", d %></p>
+      <p><%= link_to "Download this document", rails_blob_path(d.file_name, disposition: 'attachment') %></p>
+    </div>
+  <% end %>
+</div>
+
+<h2>Most viewed documents</h2>

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_09_24_124801) do
+ActiveRecord::Schema.define(version: 2019_10_01_124625) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -68,6 +68,7 @@ ActiveRecord::Schema.define(version: 2019_09_24_124801) do
     t.datetime "updated_at", null: false
     t.string "author", default: "Unknown"
     t.datetime "deleted_at"
+    t.integer "view_count"
     t.index ["deleted_at"], name: "index_documents_on_deleted_at"
     t.index ["user_id"], name: "index_documents_on_user_id"
   end

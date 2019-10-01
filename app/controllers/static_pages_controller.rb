@@ -2,6 +2,7 @@
 
 class StaticPagesController < ApplicationController
   def home
+    @most_viewed_documents = Document.all.order("view_count DESC")
   end
 
   def help
