@@ -1,0 +1,23 @@
+<div class="container">
+  <table>
+    <% @friend_requests.each do |n| %>
+      <tr>
+        <td>
+          <p>preview img</p>
+          <%= n.following.name %>
+        </td>
+        <td>
+          <%= form_for(n, method: :put) do |f| %>
+            <%= hidden_field_tag :following_id, n.id %>
+            <%= f.submit "Accept request", class: "btn btn-primary" %>
+          <% end %>
+        </td>
+        <td>
+          <%= form_for(n, html: {method: :delete}) do |f| %>
+            <%= f.submit "Unfriend", class: "btn" %>
+          <% end %>
+        </td>
+      </tr>
+    <% end %>
+  </table>
+</div>

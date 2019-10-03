@@ -7,11 +7,18 @@ Rails.application.routes.draw do
   get "/help", to: "static_pages#help"
   get "/about", to: "static_pages#about"
 
-  resources :users
+  resources :users do
+    member do
+      get "friendlist", as: "friendlist"
+    end
+  end
   resources :documents
   resources :comments
   resources :requests
   resources :histories
+  resources :categories
+  resources :category_relationships
+  resources :follow_relationships
 
   namespace :admin do
     resources :requests, only: [:index, :update]
