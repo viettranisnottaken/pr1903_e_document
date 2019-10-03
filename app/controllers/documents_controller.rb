@@ -55,7 +55,7 @@ class DocumentsController < ApplicationController
   private
 
   def document_params
-    params.require(:document).permit(:file_name, :description, :author)
+    params.require(:document).permit(:file_name, :description, :author, category_ids: [])
   end
 
   def set_document

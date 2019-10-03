@@ -3,6 +3,7 @@
 <!-- use .card instead of .panel -->
 <p>Description: <%= @document.description %></p>
 <p>Author: <%= @document.author %></p>
+<p>Category: <%= @document.categories.pluck(:category).join(", ") %></p>
 <p><%= link_to "Edit this document", edit_document_path(@document) %></p>
 <%# image_tag @document.file_name.preview(resize: "100x200") %>
 <%= link_to "Download this document", rails_blob_path(@document.file_name, disposition: 'attachment') %>

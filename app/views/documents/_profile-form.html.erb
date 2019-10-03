@@ -11,6 +11,8 @@
         <%= f.label :file_name %>
         <%= f.file_field :file_name, class: "form-control" %>
 
+        <%= f.collection_check_boxes(:category_ids, Category.all, :id, :category) %>
+
         <%= f.submit yield(:button_text), class: "btn btn-primary" %>
 
       <% end %>
