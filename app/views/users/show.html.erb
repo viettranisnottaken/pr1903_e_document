@@ -18,3 +18,11 @@
     <p><%= h.document.description %></p>
   <% end %>
 <% end %>
+
+<h2>Documents I have downloaded</h2>
+<% @downloaded_documents.each do |d| %>
+  <h3>Description: <%= d.description %></h3>
+  <p>Author: <%= d.author %></p>
+  <p><%= d.view_count %> views</p>
+  <p><%= d.download_count %> downloads</p>
+<% end %>

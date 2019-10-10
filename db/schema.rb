@@ -69,7 +69,7 @@ ActiveRecord::Schema.define(version: 2019_10_06_115431) do
     t.string "author", default: "Unknown"
     t.datetime "deleted_at"
     t.integer "view_count"
-    t.integer "download_count"
+    t.integer "download_count", default: 0
     t.index ["deleted_at"], name: "index_documents_on_deleted_at"
     t.index ["user_id"], name: "index_documents_on_user_id"
   end
