@@ -6,16 +6,21 @@
 <p>Category: <%= @document.categories.pluck(:category).join(", ") %></p>
 <p><%= link_to "Edit this document", edit_document_path(@document) %></p>
 <%# image_tag @document.file_name.preview(resize: "100x200") %>
-<%= link_to "Download this document", rails_blob_path(@document.file_name, disposition: 'attachment') %>
+<%= link_to "Download this document", download_pdf_document_path(@document), target: "blank" %>
 
-<% if History.where(user_id: current_user.id, document_id: @document.id).exists? %>
+<% if @is_read %>
   <p>You have viewed this document <%= @history.counter %> times</p>
 <% end %>
 
-<p><%= @total_view %> views</p>
+<% if @is_downloaded %>
+  <p>This document has been downloaded <%= @downloaded_time.count %> times</p>
+<% end %>
 
 <h3>People who viewed this document</h3>
 <p><%= @document.users.pluck(:name).join(", ") %></p>
+
+<h3>People who have downloaded this document</h3>
+<p><%= @document.downloaders.pluck(:name).join(", ") %></p>
 
 <h2>Comments</h2>
 

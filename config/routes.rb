@@ -12,7 +12,11 @@ Rails.application.routes.draw do
       get "friendlist", as: "friendlist"
     end
   end
-  resources :documents
+  resources :documents do
+    member do
+      get "download_pdf"
+    end
+  end
   resources :comments
   resources :requests
   resources :histories
