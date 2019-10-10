@@ -1,6 +1,7 @@
 <h1>Document</h1>
 
 <!-- use .card instead of .panel -->
+
 <p>Description: <%= @document.description %></p>
 <p>Author: <%= @document.author %></p>
 <p>Category: <%= @document.categories.pluck(:category).join(", ") %></p>

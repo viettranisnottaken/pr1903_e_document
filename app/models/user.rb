@@ -4,9 +4,10 @@ class User < ApplicationRecord
   has_many :comments
   has_many :documents
   has_many :favorites
+  has_many :favorite_documents, through: :favorites, source: :document
   has_many :follow_relationships
   has_many :histories
-  has_many :viewed_documents, through: :histories, class_name: "Document"
+  has_many :viewed_documents, through: :histories, source: :document
   has_many :downloaded_times
   has_many :downloaded_documents, through: :downloaded_times, source: :document
   has_many :requests

@@ -23,6 +23,7 @@ Rails.application.routes.draw do
   resources :categories
   resources :category_relationships
   resources :follow_relationships
+  resources :favorites, only: [:create, :destroy]
 
   namespace :admin do
     resources :requests, only: [:index, :update]
