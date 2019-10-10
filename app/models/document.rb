@@ -7,6 +7,7 @@ class Document < ApplicationRecord
   has_many :downloaded_times
   has_many :downloaders, through: :downloaded_times, source: :user
   has_many :favorites
+  has_many :favorite_users, through: :favorites, source: :user
   has_many :histories
   has_many :users, through: :histories
 

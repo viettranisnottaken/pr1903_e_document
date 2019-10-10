@@ -1,0 +1,11 @@
+<!-- <% if @document == current_user.favorite_documents.find_by(id: @document_id) %>
+  <%= button_to "Added to favorite", action: :new, class: "btn" %>
+<% else %>
+  <%= form_for(:favorites, url: favorites_path, method: :post) do |f| %>
+    <%= f.hidden_field :document_id, value: @document.id %>
+    <%= f.hidden_field :user_id, value: current_user.id %>
+    <%= f.submit "Add to favorite", class: "btn btn-primary" %>
+  <% end %>
+<% end %> -->
+
+<%# TODO: above %>
