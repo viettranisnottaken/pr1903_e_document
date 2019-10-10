@@ -8,6 +8,7 @@ class User < ApplicationRecord
   has_many :histories
   has_many :viewed_documents, through: :histories, class_name: "Document"
   has_many :downloaded_times
+  has_many :downloaded_documents, through: :downloaded_times, source: :document
   has_many :requests
 
   has_many :active_relationships, class_name: "FollowRelationship",

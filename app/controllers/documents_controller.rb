@@ -38,7 +38,7 @@ class DocumentsController < ApplicationController
     @document.update_attribute(:download_count, @total_download_count)
 
     @is_read = @document.histories.where(user_id: current_user.id).exists?
-    @is_downloaded = @document.downloaded_times.where(user_id: current_user.id)
+    @is_downloaded = @document.downloaded_times.where(user_id: current_user.id).exists?
   end
 
   def edit

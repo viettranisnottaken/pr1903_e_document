@@ -41,6 +41,7 @@ class UsersController < ApplicationController
     @histories = History.where({user_id: @user.id})
     @friend_request = current_user.active_relationships.find_by(following_id: current_user.id,
                                                                 followed_id: @user.id)
+    @downloaded_documents = current_user.downloaded_documents
   end
 
   def destroy
