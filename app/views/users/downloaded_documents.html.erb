@@ -1,0 +1,19 @@
+<h2>Documents I have downloaded</h2>
+<%= will_paginate @downloaded_documents %>
+<div class="row">
+  <% @downloaded_documents.each do |d| %>
+    <div class="col-2">
+      <div class="card">
+        <%= image_tag d.file_name.preview(size: "50x50"), class: "card-img-top" %>
+        <div class="card-body">
+          <p>Description: <%= d.description %></p>
+          <p>Author: <%= d.author %></p>
+          <p><%= d.view_count %> views</p>
+          <p><%= d.download_count %> downloads</p>
+          <p><%= link_to "document show", d %></p>
+          <p><%= link_to "Download this document", download_pdf_document_path(d), target: "blank" %></p>
+        </div>
+      </div>
+    </div>
+  <% end %>
+</div>

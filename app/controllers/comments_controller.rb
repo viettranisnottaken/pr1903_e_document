@@ -3,6 +3,7 @@
 class CommentsController < ApplicationController
   before_action :check_if_logged_in
   before_action :set_comment, only: [:edit, :update, :destroy]
+  before_action :current_user?, only: [:edit, :destroy]
 
   def create
     document = Document.find(params[:document_id])
@@ -35,7 +36,7 @@ class CommentsController < ApplicationController
   def destroy
     @comment.destroy
     flash[:success] = "Comment deleted"
-    redirect_to micropost_path(@comment.micropost.id)
+    redirect_to document_path(@comment.document.id)
   end
 
   def index
@@ -50,9 +51,11 @@ class CommentsController < ApplicationController
     @comment = Comment.find(params[:id])
   end
 
-  def check_if_logged_in
-    unless logged_in?
-      redirect_to root_path
+  def current_user?
+    unless @comment.user == current_user
+      redirect_to @comment.document
+      flash[:danger] = "Please don't meddle with others' stuffs"
     end
   end
+
 end

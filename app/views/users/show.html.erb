@@ -2,27 +2,58 @@
 
 <%= render "follow_relationships/follow-form" %>
 <% if @user == current_user %>
-  <p><%= link_to "All friend requests", follow_relationships_path %></p>
+  <p><%= link_to "All friend requests", follow_relationships_path, class: "btn btn-primary" %></p>
 <% end %>
 
-<p><%= link_to "Friendlist", friendlist_user_path %></p>
+<p><%= link_to "Friendlist", friendlist_user_path, class: "btn btn-primary" %></p>
 
+<div class="row">
+  <div class="col-3">
+    <div class="card" style="inline">
+      <%= image_tag @user.avatar, size: '200', class: "card-img-top" %>
+      <div class="card-body">
+        <h2><%= @user.name %></h2>
+      </div>
+    </div>
+  </div>
+</div>
 
-<h2><%= @user.name %></h2>
-<%= image_tag @user.avatar, size: '960x540' %>
-
-<h2>Documents I have viewed</h2>
-
-<% if @histories.count > 0 %>
-  <% @histories.each do |h| %>
-    <p><%= h.document.description %></p>
-  <% end %>
+<% if @viewed_documents %>
+  <h2>Documents I have viewed</h2>
+  <div class="row">
+    <% @viewed_documents.each do |d| %>
+      <div class="col-2">
+        <div class="card">
+          <%= image_tag d.file_name.preview(size: "50x50"), class: "card-img-top" %>
+          <div class="card-body">
+            <p>Description: <%= d.description %></p>
+            <p>Author: <%= d.author %></p>
+            <p><%= d.view_count %> views</p>
+            <p><%= d.download_count %> downloads</p>
+            <p><%= link_to "document show", d %></p>
+            <p><%= link_to "Download this document", download_pdf_document_path(d), target: "blank" %></p>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  </div>
 <% end %>
 
 <h2>Documents I have downloaded</h2>
-<% @downloaded_documents.each do |d| %>
-  <h3>Description: <%= d.description %></h3>
-  <p>Author: <%= d.author %></p>
-  <p><%= d.view_count %> views</p>
-  <p><%= d.download_count %> downloads</p>
-<% end %>
+<div class="row">
+  <% @downloaded_documents.each do |d| %>
+    <div class="col-2">
+      <div class="card">
+        <%= image_tag d.file_name.preview(size: "50x50"), class: "card-img-top" %>
+        <div class="card-body">
+          <p>Description: <%= d.description %></p>
+          <p>Author: <%= d.author %></p>
+          <p><%= d.view_count %> views</p>
+          <p><%= d.download_count %> downloads</p>
+          <p><%= link_to "document show", d %></p>
+          <p><%= link_to "Download this document", download_pdf_document_path(d), target: "blank" %></p>
+        </div>
+      </div>
+    </div>
+  <% end %>
+</div>

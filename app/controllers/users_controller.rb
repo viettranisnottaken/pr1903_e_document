@@ -1,7 +1,8 @@
 class UsersController < ApplicationController
-  before_action :set_user, only: [:show, :edit, :update, :destroy]
+  before_action :set_user, except: [:new, :create, :friendlist, :index]
   before_action :correct_user, only: [:edit, :update]
   before_action :check_admin, only: [:destroy]
+  skip_before_action :check_if_logged_in, only: [:new, :create]
 
   def index
     @users = User.paginate(page: params[:page], per_page: 10)
@@ -38,7 +39,7 @@ class UsersController < ApplicationController
 
   def show
     @user = User.find(params[:id])
-    @histories = History.where({user_id: @user.id})
+    @viewed_documents = @user.viewed_documents
     @friend_request = current_user.active_relationships.find_by(following_id: current_user.id,
                                                                 followed_id: @user.id)
     @downloaded_documents = current_user.downloaded_documents
@@ -52,6 +53,19 @@ class UsersController < ApplicationController
     @friends = current_user.following_friends + current_user.followed_friends
   end
 
+  def viewed_documents
+    @viewed_documents = @user.viewed_documents.paginate(
+      page: params[:page],
+      per_page: 24
+    )
+  end
+
+  def downloaded_documents
+    @downloaded_documents = @user.downloaded_documents.paginate(
+      page: params[:page],
+      per_page: 24
+    )
+  end
   private
 
   def users_params

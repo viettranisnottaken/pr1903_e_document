@@ -1,48 +1,64 @@
 <h1>Document</h1>
 
 <!-- use .card instead of .panel -->
-
-<p>Description: <%= @document.description %></p>
-<p>Author: <%= @document.author %></p>
-<p>Category: <%= @document.categories.pluck(:category).join(", ") %></p>
-<p><%= link_to "Edit this document", edit_document_path(@document) %></p>
-<%# image_tag @document.file_name.preview(resize: "100x200") %>
-<%= link_to "Download this document", download_pdf_document_path(@document), target: "blank" %>
-
-<% if @is_read %>
-  <p>You have viewed this document <%= @history.counter %> times</p>
-<% end %>
-
-<% if @is_downloaded %>
-  <p>This document has been downloaded <%= @downloaded_time.count %> times</p>
-<% end %>
-
-<h3>People who viewed this document</h3>
-<p><%= @document.users.pluck(:name).join(", ") %></p>
-
-<h3>People who have downloaded this document</h3>
-<p><%= @document.downloaders.pluck(:name).join(", ") %></p>
-
-<h2>Comments</h2>
-
-<% @document.comments.each do |c| %>
-  <div class="card">
-    <div class="card-body">
-      <h3><%= c.user.name %></h3>
-      <p><%= c.content %></p>
-      <p>
-        <small><%= link_to "Edit", edit_comment_path %></small>
-        <small><%= link_to "Delete", c, method: :destroy, data: {confirm: "Are you sure?"} %></small>
-      </p>
-    </div>
+<div class="row justify-content-center">
+  <div class="col-3">
+    <%= image_tag @document.file_name.preview(size: "50x50"), style: "width: 300px; height: 420px" %>
   </div>
-<% end %>
+  <div class="col-3">
+    <p>Description: <%= @document.description %></p>
+    <p>Author: <%= @document.author %></p>
+    <p>Category: <%= @document.categories.pluck(:category).join(", ") %></p>
+    <p><%= link_to "Edit this document", edit_document_path(@document) %></p>
+    <p><%= link_to "Download this document", download_pdf_document_path(@document), target: "blank" %></p>
+    <p><%= link_to "Delete this document", document_path(@document), method: :delete, data: {confirm: "U sure?"} %></p>
+  </div>
+</div>
+<div class="row justify-content-center">
+  <div class="col-6">
+    <% if @is_read %>
+      <p>You have viewed this document <%= @history.counter %> times</p>
+    <% end %>
 
-<%= form_for(@document.comments.build(user: current_user)) do |f| %>
-  <%= f.label :content %>
-  <%= f.text_field :content, class: "form-control" %>
+    <% if @is_downloaded %>
+      <p>This document has been downloaded <%= @downloaded_time.count %> times</p>
+    <% end %>
 
-  <%= hidden_field_tag :document_id, @document.id %>
+    <h3>People who viewed this document</h3>
+    <p><%= @document.users.pluck(:name).join(", ") %></p>
 
-  <%= f.submit "Comment", class: "btn btn-primary" %>
-<% end %>
+    <h3>People who have downloaded this document</h3>
+    <p><%= @document.downloaders.pluck(:name).join(", ") %></p>
+    <hr>
+  </div>
+</div>
+
+<div class="row justify-content-center">
+  <div class="col-6">
+    <h2>Comments</h2>
+    <% @document.comments.each do |c| %>
+      <div class="card">
+        <div class="card-body">
+          <span><%# image_tag c.user.avatar.preview(size: "50x50"), style: "width: 50px; height: 50px" %></span>
+          <h3><%= link_to c.user.name, user_path(c.user), class: "badge badge-dark" %></h3>
+          <p><%= c.content %></p>
+          <% if c.user == current_user %>
+            <p>
+              <small><%= link_to "Edit", edit_comment_path %></small>
+              <small><%= link_to "Delete", c, method: :delete, data: {confirm: "Are you sure?"} %></small>
+            </p>
+          <% end %>
+        </div>
+      </div>
+    <% end %>
+
+    <%= form_for(@document.comments.build(user: current_user)) do |f| %>
+      <%= f.label :content %>
+      <%= f.text_field :content, class: "form-control" %>
+
+      <%= hidden_field_tag :document_id, @document.id %>
+
+      <%= f.submit "Comment", class: "btn btn-primary" %>
+    <% end %>
+  </div>
+</div>

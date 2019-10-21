@@ -16,4 +16,16 @@ class Document < ApplicationRecord
   belongs_to :user
 
   acts_as_paranoid
+
+  validate :correct_document_mime_type
+
+  private
+
+  def correct_document_mime_type
+    if file_name.attached? && !file_name.content_type.in?(%w(application/pdf))
+      file_name.purge
+      errors.add(:file_name, 'Must be a PDF file')
+    end
+  end
+
 end

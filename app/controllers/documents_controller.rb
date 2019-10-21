@@ -56,7 +56,9 @@ class DocumentsController < ApplicationController
   end
 
   def destroy
-    #code
+    @document.destroy
+    redirect_to documents_path
+    flash[:success] = "Doc deleted"
   end
 
   def download_pdf
